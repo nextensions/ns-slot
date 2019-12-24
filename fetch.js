@@ -60,7 +60,7 @@
 
   const mCasino1 = new SlotMachine(casino1, {
     active: 0,
-    delay: 2000,
+    delay: 5000,
     onComplete: function(res) {
       const studentID = clockin[res].student_id;
       const { fullname, code, room_name, id } = studentsInfo.find(
@@ -83,7 +83,7 @@
   });
 
   btnShuffle.addEventListener("click", () => {
-    mCasino1.shuffle(10, function() {});
+    mCasino1.shuffle(0, function() {});
     const randomDetail = document.querySelector("#random-detail");
     randomDetail.innerHTML = "";
   });
