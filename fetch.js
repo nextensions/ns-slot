@@ -56,6 +56,7 @@
   if (clockin.length) {
     setTimeout(function() {
       btnShuffle.removeAttribute("disabled");
+      btnShuffle.removeChild(btnShuffle.firstElementChild);
     }, 16000);
   }
   const player = document.querySelector("#player");
