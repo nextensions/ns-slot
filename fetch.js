@@ -54,7 +54,9 @@
 
   // render player
   if (clockin.length) {
-    btnShuffle.removeAttribute("disabled");
+    setTimeout(function() {
+      btnShuffle.removeAttribute("disabled");
+    }, 16000);
   }
   const player = document.querySelector("#player");
   player.innerHTML = clockin.length;
