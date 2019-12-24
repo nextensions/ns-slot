@@ -1,4 +1,5 @@
 (async () => {
+  // fetch data
   const { data: studentsInfo } = await axios.get("./data/28/data.json");
   const { data: styles } = await axios.get("./data/28/style.css");
   const { data: event } = await axios.get(
@@ -20,22 +21,23 @@
     clockin = data;
   }
 
+  // get node
   const eventList = document.querySelector("#eventList");
   const btnShuffle = document.querySelector("#casinoShuffle");
-  const btnStop = document.querySelector("#casinoStop");
-  createEvent(0, "นักเรียนที่มาเรียน", eventList);
+  const btnReset = document.querySelector("#playerReset");
 
+  // create event radio button
+  createEvent(0, "นักเรียนที่มาเรียน", eventList);
   if (event.length) {
     const topic = document.querySelector("#topic");
-    console.log(topic);
-
     topic.style.cssText = "display: block;";
     event.map(({ id, name }) => {
       createEvent(id, name, eventList, foundParam);
     });
   }
 
-  const match = [];
+  // matching
+  let match = [];
   const casino1 = document.querySelector("#casino1");
 
   clockin.map(({ student_id }) => {
@@ -44,20 +46,25 @@
     casino1.appendChild(div);
   });
 
-  if (clockin.length) {
-    btnShuffle.removeAttribute("disabled");
-  }
-
+  // inject css
   var style = document.createElement("style");
   style.innerHTML = styles;
   var ref = document.querySelector("script");
   ref.parentNode.insertBefore(style, ref);
 
+  // render player
+  if (clockin.length) {
+    btnShuffle.removeAttribute("disabled");
+  }
   const player = document.querySelector("#player");
   player.innerHTML = clockin.length;
   const totalPlayer = document.querySelector("#totalPlayer");
   totalPlayer.innerHTML = studentsInfo.length;
 
+  const randomDetail = document.querySelector("#randomDetail");
+  const matchPlayer = document.querySelector("#matchPlayer");
+
+  // create slot
   const mCasino1 = new SlotMachine(casino1, {
     active: 0,
     delay: 5000,
@@ -70,27 +77,30 @@
         this.run();
       } else {
         match.push(id);
-        const randomDetail = document.querySelector("#random-detail");
         randomDetail.innerHTML = `${fullname} ${code} ${room_name}`;
-
-        const matchPlayerSum = document.querySelector("#matchPlayerSum");
-        matchPlayerSum.innerHTML = match.length;
-
-        const matchPlayer = document.querySelector("#matchPlayer");
-        createRow(match, code, fullname, room_name, matchPlayer);
+        setSumMatchPlayer(match.length);
+        createRowPlayer(match, code, fullname, room_name, matchPlayer);
       }
     }
   });
 
+  // add event to shuffle button
   btnShuffle.addEventListener("click", () => {
-    mCasino1.shuffle(0, function() {});
-    const randomDetail = document.querySelector("#random-detail");
+    mCasino1.shuffle(0, function() {
+      btnReset.removeAttribute("disabled");
+    });
     randomDetail.innerHTML = "";
   });
 
-  // btnStop.addEventListener("click", () => {
-  //   mCasino1.stop();
-  // });
+  // add event to reset button
+  btnReset.addEventListener("click", () => {
+    match = [];
+    setSumMatchPlayer(0);
+    const matchPlayer = document.querySelector("#matchPlayer");
+    resetRowPlayer(matchPlayer);
+    randomDetail.innerHTML = "";
+    btnReset.setAttribute("disabled");
+  });
 })();
 
 const handleEvent = i => {
@@ -122,7 +132,7 @@ const createEvent = (id, name, node, param) => {
   node.appendChild(div);
 };
 
-const createRow = (match, code, fullname, room_name, node) => {
+const createRowPlayer = (match, code, fullname, room_name, tbody) => {
   const row = document.createElement("tr");
 
   const no = document.createElement("th");
@@ -139,5 +149,18 @@ const createRow = (match, code, fullname, room_name, node) => {
   row.appendChild(codeStudent);
   row.appendChild(name);
   row.appendChild(classroom);
-  node.appendChild(row);
+  tbody.appendChild(row);
+};
+
+const resetRowPlayer = tbody => {
+  let child = tbody.lastElementChild;
+  while (child) {
+    tbody.removeChild(child);
+    child = tbody.lastElementChild;
+  }
+};
+
+const setSumMatchPlayer = sum => {
+  const matchPlayerSum = document.querySelector("#matchPlayerSum");
+  matchPlayerSum.innerHTML = sum;
 };
