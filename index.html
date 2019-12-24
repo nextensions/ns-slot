@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>jQuery Slot Machine</title>
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2.0"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="./styles/style.css"
+      type="text/css"
+      media="screen"
+    />
+    <link
+      rel="stylesheet"
+      href="./lib/css/jquery.slotmachine.min.css"
+      type="text/css"
+      media="screen"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"
+      type="text/css"
+    />
+    <script src="./lib/js/axios.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./lib/js/slotmachine.min.js"></script>
+    <script src="./lib/js/jquery.slotmachine.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.0.10/js/all.js"
+      integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+"
+      crossorigin="anonymous"
+    ></script>
+    <script type="text/javascript" src="./fetch.js" async></script>
+  </head>
+
+  <body>
+    <!-- Slot machine example -->
+    <div id="casino" class="container-fluid h-100" style="padding-top:50px;">
+      <div class="row">
+        <div class="col-md-2">
+          <div id="topic" style="display: none;">
+            <h4>กลุ่มเป้าหมายที่ต้องการใช้ร่วมกิจกรรม</h4>
+            <br />
+            <div id="eventList"></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="content">
+            <h1>Siri Slot</h1>
+            <div>
+              <div
+                id="casino1"
+                class="slotMachine "
+                style="margin-left: -65px;"
+              ></div>
+              <div
+                id="random-detail"
+                style="margin-left: -65px; margin-top: 38px;"
+              ></div>
+              <div class="btn-group btn-group-justified" role="group">
+                <button
+                  id="casinoShuffle"
+                  type="button"
+                  class="btn btn-primary btn-lg"
+                  disabled
+                >
+                  Shuffle!
+                </button>
+                <!-- <button
+                  id="casinoStop"
+                  type="button"
+                  class="btn btn-primary btn-lg"
+                >
+                  Stop!
+                </button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <h4>จำนวนผู้มาร่วมงาน : <span id="player"></span></h4>
+          <h4>จำนวนนักเรียนทั้งหมด : <span id="totalPlayer"></span></h4>
+          <br /><br />
+          <h4>รายชื่อผู้โชคดี จำนวน <span id="matchPlayerSum">0</span> คน</h4>
+          <div
+            class="table-responsive-sm"
+            style="height:450px;overflow-y:scroll;"
+          >
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center">#</th>
+                  <th scope="col" class="text-center">รหัสนักเรียน</th>
+                  <th scope="col" class="text-center">ชื่อ-สกุล</th>
+                  <th scope="col" class="text-center">ชั้น</th>
+                </tr>
+              </thead>
+              <tbody id="matchPlayer"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
