@@ -57,7 +57,7 @@
     setTimeout(function() {
       btnShuffle.removeAttribute("disabled");
       btnShuffle.removeChild(btnShuffle.firstElementChild);
-    }, (clockin.length / 100).toFixed() * 1000);
+    }, (clockin.length / 110).toFixed() * 1000);
   }
   const player = document.querySelector("#player");
   player.innerHTML = clockin.length;
@@ -141,12 +141,18 @@ const createRowPlayer = (match, code, fullname, room_name, tbody) => {
   const no = document.createElement("th");
   no.setAttribute("scope", "row");
   no.innerHTML = match.length;
+  no.className = `text-center`;
+
   const codeStudent = document.createElement("td");
   codeStudent.innerHTML = code;
+  codeStudent.className = `text-center`;
+
   const name = document.createElement("td");
   name.innerHTML = fullname;
+
   const classroom = document.createElement("td");
   classroom.innerHTML = room_name;
+  classroom.className = `text-center`;
 
   row.appendChild(no);
   row.appendChild(codeStudent);
