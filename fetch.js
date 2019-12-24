@@ -83,7 +83,7 @@
   });
 
   btnShuffle.addEventListener("click", () => {
-    mCasino1.shuffle(0, function() {});
+    mCasino1.shuffle(10, function() {});
     const randomDetail = document.querySelector("#random-detail");
     randomDetail.innerHTML = "";
   });
