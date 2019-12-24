@@ -57,7 +57,7 @@
     setTimeout(function() {
       btnShuffle.removeAttribute("disabled");
       btnShuffle.removeChild(btnShuffle.firstElementChild);
-    }, (clockin.length / 85).toFixed() * 1000);
+    }, (clockin.length / 95).toFixed() * 1000);
   }
   const player = document.querySelector("#player");
   player.innerHTML = clockin.length;
