@@ -74,7 +74,7 @@
     active: 0,
     delay: 5000,
     onComplete: function(res) {
-      rollingSound.play();
+      //rollingSound.play();
       const studentID = clockin[res].student_id;
       const { fullname, code, room_name, id } = studentsInfo.find(
         ({ id }) => id == studentID
