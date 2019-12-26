@@ -27,7 +27,6 @@
   const btnReset = document.querySelector("#playerReset");
   const rollingSound = document.querySelector("#rollingSound");
   const stopSound = document.querySelector("#stopSound");
-  rollingSound.loop = true;
 
   // create event radio button
   createEvent(0, "นักเรียนที่มาเรียน", eventList);

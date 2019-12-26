@@ -359,6 +359,10 @@ footer .content {
   background-color: rgb(180, 75, 119);
 }
 
+.slot-audio {
+  display: none;
+}
+
 /*
  * Footer
  */
