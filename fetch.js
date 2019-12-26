@@ -25,8 +25,21 @@
   const eventList = document.querySelector("#eventList");
   const btnShuffle = document.querySelector("#casinoShuffle");
   const btnReset = document.querySelector("#playerReset");
-  const rollingSound = document.querySelector("#rollingSound");
+  // const rollingSound = document.querySelector("#rollingSound");
   const stopSound = document.querySelector("#stopSound");
+
+  var rollingSound = new Audio("sound/siri-slot.mp3");
+  rollingSound.addEventListener(
+    "timeupdate",
+    function() {
+      var buffer = 0.54;
+      if (this.currentTime > this.duration - buffer) {
+        this.currentTime = 0;
+        this.play();
+      }
+    },
+    false
+  );
 
   // create event radio button
   createEvent(0, "นักเรียนที่มาเรียน", eventList);
@@ -80,11 +93,10 @@
         ({ id }) => id == studentID
       );
       if (match.find(item => item == id)) {
-        
         this.run();
       } else {
         rollingSound.pause();
-        console.log('sound peause');
+        console.log("sound peause");
         stopSound.play();
         match.push(id);
         randomDetail.innerHTML = `${fullname} ${code} ${room_name}`;
