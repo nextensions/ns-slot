@@ -32,7 +32,7 @@
   rollingSound.addEventListener(
     "timeupdate",
     function() {
-      var buffer = 0.54;
+      var buffer = 0.9;
       if (this.currentTime > this.duration - buffer) {
         this.currentTime = 0;
         this.play();
@@ -87,7 +87,6 @@
     active: 0,
     delay: 5000,
     onComplete: function(res) {
-      rollingSound.play();
       const studentID = clockin[res].student_id;
       const { fullname, code, room_name, id } = studentsInfo.find(
         ({ id }) => id == studentID
@@ -96,7 +95,6 @@
         this.run();
       } else {
         rollingSound.pause();
-        console.log("sound peause");
         stopSound.play();
         match.push(id);
         randomDetail.innerHTML = `${fullname} ${code} ${room_name}`;
