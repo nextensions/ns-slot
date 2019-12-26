@@ -74,7 +74,7 @@
     active: 0,
     delay: 5000,
     onComplete: function(res) {
-      rollingSound.pause();
+      
       const studentID = clockin[res].student_id;
       const { fullname, code, room_name, id } = studentsInfo.find(
         ({ id }) => id == studentID
@@ -83,6 +83,7 @@
         rollingSound.play();
         this.run();
       } else {
+        rollingSound.pause();
         stopSound.play();
         match.push(id);
         randomDetail.innerHTML = `${fullname} ${code} ${room_name}`;
