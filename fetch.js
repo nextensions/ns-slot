@@ -68,12 +68,12 @@
   ref.parentNode.insertBefore(style, ref);
 
   // render player
-  if (clockin.length) {
-    setTimeout(function() {
-      btnShuffle.removeAttribute("disabled");
-      btnShuffle.removeChild(btnShuffle.firstElementChild);
-    }, (clockin.length / 110).toFixed() * 1000);
-  }
+  // if (clockin.length) {
+  //   setTimeout(function() {
+  //     btnShuffle.removeAttribute("disabled");
+  //     btnShuffle.removeChild(btnShuffle.firstElementChild);
+  //   }, (clockin.length / 110).toFixed() * 1000);
+  // }
   const player = document.querySelector("#player");
   player.innerHTML = clockin.length;
   const totalPlayer = document.querySelector("#totalPlayer");
@@ -99,8 +99,8 @@
         match.push(id);
         randomDetail.innerHTML = `${fullname} ${code} ${room_name}`;
         setSumMatchPlayer(match.length);
-        createRowPlayer(match, code, fullname, room_name, matchPlayer);
       }
+      createRowPlayer(match, code, fullname, room_name, matchPlayer);
     }
   });
 
@@ -108,7 +108,7 @@
   btnShuffle.addEventListener("click", () => {
     rollingSound.play();
 
-    mCasino1.shuffle(-1, function() {
+    mCasino1.shuffle(0, function() {
       btnReset.removeAttribute("disabled");
     });
     randomDetail.innerHTML = "";
