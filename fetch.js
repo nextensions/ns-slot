@@ -25,6 +25,9 @@
   const eventList = document.querySelector("#eventList");
   const btnShuffle = document.querySelector("#casinoShuffle");
   const btnReset = document.querySelector("#playerReset");
+  const rollingSound = document.querySelector("#rollingSound");
+  const stopSound = document.querySelector("#stopSound");
+  rollingSound.loop = true;
 
   // create event radio button
   createEvent(0, "นักเรียนที่มาเรียน", eventList);
@@ -72,13 +75,16 @@
     active: 0,
     delay: 5000,
     onComplete: function(res) {
+      rollingSound.pause();
       const studentID = clockin[res].student_id;
       const { fullname, code, room_name, id } = studentsInfo.find(
         ({ id }) => id == studentID
       );
       if (match.find(item => item == id)) {
+        rollingSound.play();
         this.run();
       } else {
+        stopSound.play();
         match.push(id);
         randomDetail.innerHTML = `${fullname} ${code} ${room_name}`;
         setSumMatchPlayer(match.length);
@@ -89,7 +95,9 @@
 
   // add event to shuffle button
   btnShuffle.addEventListener("click", () => {
-    mCasino1.shuffle(0, function() {
+    rollingSound.play();
+
+    mCasino1.shuffle(-1, function() {
       btnReset.removeAttribute("disabled");
     });
     randomDetail.innerHTML = "";
