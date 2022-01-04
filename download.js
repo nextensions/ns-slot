@@ -4,20 +4,20 @@ const axios = require("axios");
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout
+  output: process.stdout,
 });
 
-rl.question("What is school id ? ", schoolID => {
+rl.question("What is school id ? ", (schoolID) => {
   const path = `/data/${schoolID}`;
-  rl.question("What do you need data type ? (json/image) : ", async type => {
+  rl.question("What do you need data type ? (json/image) : ", async (type) => {
     if (type == "json") {
       // save json
       let styles = "";
       const { data: res } = await axios.get(
-        "http://localhost:8086/v1/student/get-info?school_id=28"
+        `https://rest.nextschool.io/v1/student/get-info?school_id=${schoolID}`
       );
-      res.map(i => {
-        styles += `.slot-${i.id} {background-image: url(./data/${schoolID}/img/${i.id}.jpg);display: block;margin: 0 auto;height: 116px;width: auto;}`;
+      res.map((i) => {
+        styles += `.slot-${i.id} {background-image: url(./data/${schoolID}/img/${i.image});display: block;margin: 0 auto;height: 116px;width: auto;}`;
       });
       const now = new Date(Date.now()).toISOString();
       fs.writeFileSync(`.${path}/css/${now}.css`, JSON.stringify(styles));
@@ -26,7 +26,7 @@ rl.question("What is school id ? ", schoolID => {
       fs.writeFileSync(`.${path}/json/${now}.json`, JSON.stringify(res));
       fs.writeFileSync(`.${path}/data.json`, JSON.stringify(res));
 
-      console.log(`Download json and save here : .${path}/data/.json`);
+      console.log(`Download json and save here : .${path}/data/data.json`);
 
       rl.close();
     } else if (type == "image") {
@@ -38,14 +38,14 @@ rl.question("What is school id ? ", schoolID => {
         fs.readFileSync(`.${path}/data.json`, "utf8")
       );
 
-      const res = studentInfo.map(async ({ image, id }, index) => {
+      const res = studentInfo.map(async ({ image, id, code }, index) => {
         const res = await axios({
           method: "get",
           url: url + image,
-          responseType: "stream"
+          responseType: "stream",
         });
         return res.data.pipe(
-          fs.createWriteStream(`./data/${schoolID}/img/${id}.jpg`)
+          fs.createWriteStream(`./data/${schoolID}/img/${image}`)
         );
       });
       console.log(res);
